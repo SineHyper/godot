@@ -812,6 +812,10 @@ void TextureStorage::texture_2d_layered_initialize(RID p_texture, const Vector<R
 	}
 }
 
+void TextureStorage::texture_drawable_initialize(RID p_texture, const Size2i& p_size, RenderingServer::TextureDrawableFormat p_format,bool p_with_mipmaps = false) {
+
+}
+
 void TextureStorage::texture_3d_initialize(RID p_texture, Image::Format, int p_width, int p_height, int p_depth, bool p_mipmaps, const Vector<Ref<Image>> &p_data) {
 	texture_owner.initialize_rid(p_texture, Texture());
 }

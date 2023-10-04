@@ -99,7 +99,7 @@ public:
 
 	virtual void call(const Variant **p_arguments, int p_argcount, Variant &r_return_value, Callable::CallError &r_call_error) const {
 #ifdef DEBUG_ENABLED
-		ERR_FAIL_COND_MSG(ObjectDB::get_instance(ObjectID(data.object_id)) == nullptr, "Invalid Object id '" + uitos(data.object_id) + "', can't call method.");
+		DEV_ASSERT(ObjectDB::get_instance(ObjectID(data.object_id)) != nullptr);
 #endif
 		call_with_variant_args(data.instance, data.method, p_arguments, p_argcount, r_call_error);
 	}

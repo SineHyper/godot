@@ -1673,8 +1673,9 @@ void RenderingServer::_bind_methods() {
 	BIND_CONSTANT(MAX_2D_DIRECTIONAL_LIGHTS);
 
 	/* TEXTURE */
-
+	
 	ClassDB::bind_method(D_METHOD("texture_2d_create", "image"), &RenderingServer::texture_2d_create);
+	ClassDB::bind_method(D_METHOD("texture_drawable_create", "p_size", "p_format", "p_with_mipmaps"), &RenderingServer::texture_drawable_create);
 	ClassDB::bind_method(D_METHOD("texture_2d_layered_create", "layers", "layered_type"), &RenderingServer::_texture_2d_layered_create);
 	ClassDB::bind_method(D_METHOD("texture_3d_create", "format", "width", "height", "depth", "mipmaps", "data"), &RenderingServer::_texture_3d_create);
 	ClassDB::bind_method(D_METHOD("texture_proxy_create", "base"), &RenderingServer::texture_proxy_create);
@@ -1714,6 +1715,7 @@ void RenderingServer::_bind_methods() {
 	BIND_ENUM_CONSTANT(CUBEMAP_LAYER_TOP);
 	BIND_ENUM_CONSTANT(CUBEMAP_LAYER_FRONT);
 	BIND_ENUM_CONSTANT(CUBEMAP_LAYER_BACK);
+	BIND_ENUM_CONSTANT(TEXTURE_DRAWABLE_FORMAT_RGBA8);
 
 	/* SHADER */
 

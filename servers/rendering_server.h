@@ -103,7 +103,15 @@ public:
 		CUBEMAP_LAYER_BACK
 	};
 
+		enum TextureDrawableFormat {
+		TEXTURE_DRAWABLE_FORMAT_RGBA8,
+		TEXTURE_DRAWABLE_FORMAT_RGBA8_SRGB, // Use this if you want to read the result from both 2D (non-hdr) and 3D.
+		TEXTURE_DRAWABLE_FORMAT_RGBAH,
+		TEXTURE_DRAWABLE_FORMAT_RGBAF,
+	};
+
 	virtual RID texture_2d_create(const Ref<Image> &p_image) = 0;
+	virtual RID texture_drawable_create(const Size2i& p_size, TextureDrawableFormat p_format,bool p_with_mipmaps) = 0;
 	virtual RID texture_2d_layered_create(const Vector<Ref<Image>> &p_layers, TextureLayeredType p_layered_type) = 0;
 	virtual RID texture_3d_create(Image::Format, int p_width, int p_height, int p_depth, bool p_mipmaps, const Vector<Ref<Image>> &p_data) = 0; //all slices, then all the mipmaps, must be coherent
 	virtual RID texture_proxy_create(RID p_base) = 0;
@@ -1626,6 +1634,7 @@ private:
 };
 
 // Make variant understand the enums.
+VARIANT_ENUM_CAST(RenderingServer::TextureDrawableFormat);
 VARIANT_ENUM_CAST(RenderingServer::TextureLayeredType);
 VARIANT_ENUM_CAST(RenderingServer::CubeMapLayer);
 VARIANT_ENUM_CAST(RenderingServer::ShaderMode);

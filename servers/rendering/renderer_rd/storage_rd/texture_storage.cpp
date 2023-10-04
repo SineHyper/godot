@@ -970,6 +970,19 @@ void TextureStorage::texture_2d_layered_initialize(RID p_texture, const Vector<R
 	texture_owner.initialize_rid(p_texture, texture);
 }
 
+void TextureStorage::texture_drawable_initialize(RID p_texture, const Size2i& p_size, RenderingServer::TextureDrawableFormat p_format,bool p_with_mipmaps = false){
+	ERR_PRINT("First");
+	Image targetImage(p_size.x, p_size.y, p_with_mipmaps, Image::FORMAT_RGBA8);
+	texture_2d_initialize(p_texture, &targetImage);
+	ERR_PRINT("Second"); 
+	Texture *texture = texture_owner.get_or_null(p_texture);
+	Vector<RID> fb;
+	ERR_PRINT("Third"); 
+	fb.push_back(texture->rd_texture);
+	texture->framebuffer = RD::get_singleton()->framebuffer_create(fb);
+	ERR_PRINT("Last"); 
+}
+
 void TextureStorage::texture_3d_initialize(RID p_texture, Image::Format p_format, int p_width, int p_height, int p_depth, bool p_mipmaps, const Vector<Ref<Image>> &p_data) {
 	ERR_FAIL_COND(p_data.size() == 0);
 
